@@ -1,0 +1,14 @@
+.grid-container {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: repeat(2, 200px);
+    grid-template-rows: repeat(3, 100px);
+    grid-gap: 20px;
+    justify-content: space-between;
+    align-content: center;
+    align-items: end;
+}
+
+.grid-item {
+    border: 1px solid black;
+}

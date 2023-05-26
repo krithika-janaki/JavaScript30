@@ -1,0 +1,66 @@
+html {
+    box-sizing: border-box;
+}
+
+.board {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: repeat(3, 60px);
+    grid-template-columns: repeat(3, 60px);
+    justify-content: center;
+    align-content: center;
+}
+
+.grid {
+    max-width: 80px;
+    border: solid 1px black;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.grid.x:hover {
+    cursor: not-allowed;
+}
+
+.grid.o:hover {
+    cursor: not-allowed;
+}
+
+.grid.x::before {
+    content: '';
+    width: 5px;
+    height: 35px;
+    background-color: black;
+    transform: rotate(45deg);
+    position: absolute;
+}
+
+.grid.x::after {
+    content: '';
+    width: 5px;
+    height: 35px;
+    background-color: black;
+    transform: rotate(-45deg);
+    position: absolute;
+}
+
+.grid.o::before  {
+    content: '';
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: black;
+    position: absolute;
+}
+
+.grid.o::after {
+    content: '';
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    background-color: white;
+    position: absolute;
+}

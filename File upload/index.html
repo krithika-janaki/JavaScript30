@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="images"></div>
+    <form>
+        <label for="file">Choose file to upload</label>
+        <input type="file" id="file-upload" name="file" accept="image/*"></input>
+        <button type="submit">Submit</button>
+        <form>
+    </div>
+
+    
+
+    <script>
+        const form = document.querySelector('form');
+        const file = document.querySelector('input[name="file"]');
+        form.addEventListener('submit', handleFileSubmit)
+
+
+        function logFile(e) {
+            console.log('e.target', e.target.result);
+        }
+        function handleFileSubmit(e) {
+            e.preventDefault();
+        console.log('file', file);
+        if(!file.value.length) return;
+        let reader = new FileReader();
+
+			// Setup the callback event to run when the file is read
+			reader.onload = logFile;
+            reader.readAsDataURL(file.files[0]);
+    }   
+    </script>
+</body>
+</html>

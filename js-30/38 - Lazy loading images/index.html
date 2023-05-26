@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+      .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
+  width: 49%;
+  height: 200px;
+  border: solid 1px black;
+}
+    </style>
+</head>
+<body>
+    <h1>Welcome to loading images</h1>
+    <div class="container">
+        <div class="card"><img data-src="https://picsum.photos/100">card</img></div>
+        <div class="card"><img data-src="https://picsum.photos/100">card</img></div>
+        <div class="card"><img data-src="https://picsum.photos/100">card</img></div>
+        <div class="card"><img data-src="https://picsum.photos/100">card</img></div>
+        <div class="card"><img data-src="https://picsum.photos/100">card</img></div>
+        <div class="card"><img data-src="https://picsum.photos/100">card</img></div>
+        <div class="card"><img data-src="https://picsum.photos/100">card</img></div>
+        <div class="card"><img data-src="https://picsum.photos/100">card</img></div>
+        <div class="card"><img data-src="https://picsum.photos/100">card</img></div>
+        <div class="card"><img data-src="https://picsum.photos/100">card</img></div>
+        <div class="card"><img data-src="https://picsum.photos/100">card</img></div>
+        <div class="card"><img data-src="https://picsum.photos/100">card</img></div>
+        <div class="card"><img data-src="https://picsum.photos/100">card</img></div>
+        <div class="card"><img data-src="https://picsum.photos/100">card</img></div>
+        <div class="card"><img data-src="https://picsum.photos/100">card</img></div>
+        <div class="card"><img data-src="https://picsum.photos/100">card</img></div>
+        <div class="card"><img data-src="https://picsum.photos/100">card</img></div>
+    </div>
+    <div class="box">
+        <div>One</div>
+        <div>Two</div>
+        <div>Three</div>
+      </div>
+      <script>
+        const look = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.src = entry.target.dataset.src;
+                    look.unobserve(entry.target);
+                }
+            })
+
+        }, {
+            threshold: 1,
+        })
+        const images = document.querySelectorAll('[data-src]');
+        images.forEach(image => {
+            look.observe(image);
+        })
+      </script>
+</body>
+</html>

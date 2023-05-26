@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class='head'>
+        <p>dsfsdf</p>
+        <span class='yolo'></span>
+        <div id='head'>
+            <p>dsfdsf</p>
+            <span>dsfsdfd</span>
+        </div>
+    </div>
+    <script>
+        Document.prototype.myQuerySelectorAllDFS = function(selector) {
+            let result = [];
+
+            function dfs(node) {
+                if(!node) return;
+                if(node.matches(selector)) {
+                    result.push(node);
+                }
+                for(const child of node.children) {
+                    dfs(child);
+                }
+            }
+            dfs(document.documentElement);
+
+        return result;
+
+  }
+
+  Document.prototype.myQuerySelectorAllBFS = function(selector) {
+            let result = [];
+            let queue = [document.documentElement];
+
+            while(queue.length) {
+                let size = queue.length;
+
+                for(let i=0; i < size;i++) {
+                    let ele = queue.shift();
+                    if(ele.matches(selector)) {
+                        result.push(ele);
+                    }
+                    queue.push(...ele.children);
+                }
+            }
+
+        return result;
+
+  }
+
+  console.log(document.myQuerySelectorAllDFS('span'));
+  console.log(document.myQuerySelectorAllBFS('span'));
+    </script>
+    </script>
+    
+</body>
+
+</html>
