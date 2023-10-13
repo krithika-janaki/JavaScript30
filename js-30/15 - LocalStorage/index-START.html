@@ -27,38 +27,39 @@
   </div>
 
 <script>
-  const addItems = document.querySelector('.add-items');
-  const itemsList = document.querySelector('.plates');
-  const inputBox = document.querySelector('input[name="item"]');
-  
-  const items = [];
+  const form = document.querySelector('form');
+  const list = document.querySelector('ul');
+  let arr = [];
 
   function onSubmit(e) {
     e.preventDefault();
-    const inputBox = this.querySelector('input[name="item"]').value;
-    items.push(inputBox);
-    const htmlMarkupToBeAdded = items.map((item, i) => {
-      return `<li>
-        <input type="checkbox" id='${i}' />
-        <label for="${i}">${item}</label> 
-        </li>`;
-    }).join('');
-    itemsList.innerHTML = htmlMarkupToBeAdded;
+    const itemName = this.querySelector('input[name="item"]').value;
+    populateList(itemName, list);
     this.reset();
   }
 
-  function onChecked() {
-    this.checked = !this.checked;
-    console.log('this', this);
+  function populateList(itemName) {
+    arr.push(itemName);
+    let html = arr.map((ele, ind) => {
+      return `<li>
+        <input type="checkbox" id="pp${ind}" data-id="${ind}" />
+        <label for="pp${ind}">${ele}</label>
+        </li>
+        `
+    }).join('');
+    list.innerHTML = html;
   }
 
-  if(items.length) {
-    const inputChecks = document.querySelectorAll('input[type="checkbox"]');
-    inputChecks.forEach((checkbox) => checkbox.addEventListener('change', onChecked));
+  function handleClick(e) {
+    if(!e.target.matches('input')) return;
+
+    e.target.checked = true;
+    console.log(e.target);
   }
 
-  
-  addItems.addEventListener('submit', onSubmit)
+  list.addEventListener('click', handleClick);
+  form.addEventListener('submit', onSubmit);
+
 </script>
 
 

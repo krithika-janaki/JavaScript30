@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .progressBarWrapper {
+            width: 50%;
+            height: 4px;
+            overflow: hidden;
+            border-radius: 4px;
+            background-color: gray;
+            margin-bottom: 10px;
+        }
+
+        .progress {
+            width: 0;
+            height: 100%;
+            overflow: hidden;
+            background: aquamarine;
+            transition: width 0.3s;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="progressBarWrapper" data-duration="3000">
+        <div class="progress" data-progress="0"></div>
+    </div>
+    <div class="progressBarWrapper" data-duration="3000">
+        <div class="progress" data-progress="0"></div>
+    </div>
+
+    <script>
+    const prog = document.querySelectorAll('.progress');
+
+    function showProgress(bar) {
+        let p = parseInt(bar.dataset.progress)
+        p++;
+        bar.style.width = p + '%';
+        bar.dataset.progress = p;
+            if(p >= 100) {
+                clearInterval(bar.intervalId);
+            }
+
+           
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        prog.forEach(bar => {
+            bar.intervalId = setInterval(function() {
+                showProgress(bar)
+            }, 30)
+        })
+    })
+    </script>
+</body>
+</html>

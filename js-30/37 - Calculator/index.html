@@ -9,10 +9,14 @@
 </head>
 <body>
     <div class="container">
-        <div class="op" data-number="operation">+</div>
-        <div class="op" data-number="operation">-</div>
-        <div class="op"data-number="operation">/</div>
-        <div class="op" data-number="operation">*</div>
+        <div class="result">
+            <div data-prev-operand></div>
+            <div data-current-operand></div>
+        </div>
+        <div class="op" data-operation>+</div>
+        <div class="op" data-operation>-</div>
+        <div class="op" data-operation>/</div>
+        <div class="op" data-operation>*</div>
         <div class="num"data-number="number">1</div>
         <div class="num" data-number="number">2</div>
         <div class="num" data-number="number">3</div>
@@ -22,48 +26,85 @@
         <div class="num" data-number="number">7</div>
         <div class="num" data-number="number">8</div>
         <div class="num" data-number="number">9</div>
+        <div class="num" data-number="number">0</div>
         <div class="equals">=</div>
-        <div class="result"></div>
     </div>
     
     <script>
-        let currentNumber = "";
-        let prevResult;
-        let currentResult;
-        let currentOperation;
 
+        class Calculator {
+            constructor(prevOp, currOp) {
+                this.prevOp = prevOp;
+                this.currOp = currOp;
+                this.operation = '';
+            }
+
+            append(number) {
+                this.currOp = this.currOp.toString() + number;
+                console.log('this.currOp',this.currOp);
+            }
+
+            updateDisplay() {
+                const getPrevValueELe = document.querySelector('[data-prev-operand]');
+                console.log()
+                const getCurrValueELe = document.querySelector('[data-current-operand]');
+                getCurrValueELe.innerHTML = this.currOp;
+            }
+
+            updateOperation() {
+
+            }
+
+        }
+
+        const calculator = new Calculator('', '');
         const numbers = document.querySelectorAll('[data-number="number"]');
-        const operations = document.querySelectorAll('[data-number="operation"]');
+        const operations = document.querySelectorAll('[data-operation]');
         const equal = document.querySelector('.equals');
 
-        function calculateResult(pR, cO, cN) {
-            console.log('in calculate result');
-            switch(cO) {
-                case "+" : currentResult = Number(pR) + Number(cN);
-                case "-": currentResult = Number(pR) - Number(cN);
-            }
-            console.log(currentResult);
-            document.querySelector(".result").textContent = currentResult;
-        }
-        function onCLickNumber() {
-            currentNumber +=  this.innerText;
-            console.log(currentNumber)
-        }
+        numbers.forEach((num) => num.addEventListener('click', () => {
+            calculator.append(num.innerText);
+            calculator.updateDisplay();
+        }))
 
-        function onClickOperation() {
-            if(currentResult) {
-                prevResult = currentResult;
-            } else {
-                prevResult = currentNumber;
-            }
-            currentNumber = "";
-            currentOperation = this.innerText;
-            console.log('in operation click', currentOperation);
-        }
-        equal.addEventListener('click', () => calculateResult(prevResult, currentOperation, currentNumber))
 
-        numbers.forEach(number => number.addEventListener('click', onCLickNumber));
-        operations.forEach(number => number.addEventListener('click', onClickOperation));
+        // let currentNumber = "";
+        // let prevResult;
+        // let currentResult;
+        // let currentOperation;
+
+        // const numbers = document.querySelectorAll('[data-number="number"]');
+        // const operations = document.querySelectorAll('[data-number="operation"]');
+        // const equal = document.querySelector('.equals');
+
+        // function calculateResult(pR, cO, cN) {
+        //     console.log('in calculate result');
+        //     switch(cO) {
+        //         case "+" : currentResult = Number(pR) + Number(cN);
+        //         case "-": currentResult = Number(pR) - Number(cN);
+        //     }
+        //     console.log(currentResult);
+        //     document.querySelector(".result").textContent = currentResult;
+        // }
+        // function onCLickNumber() {
+        //     currentNumber +=  this.innerText;
+        //     console.log(currentNumber)
+        // }
+
+        // function onClickOperation() {
+        //     if(currentResult) {
+        //         prevResult = currentResult;
+        //     } else {
+        //         prevResult = currentNumber;
+        //     }
+        //     currentNumber = "";
+        //     currentOperation = this.innerText;
+        //     console.log('in operation click', currentOperation);
+        // }
+        // equal.addEventListener('click', () => calculateResult(prevResult, currentOperation, currentNumber))
+
+        // numbers.forEach(number => number.addEventListener('click', onCLickNumber));
+        // operations.forEach(number => number.addEventListener('click', onClickOperation));
     </script>
 </body>
 </html>

@@ -1,0 +1,23 @@
+body {
+    height: 100vh;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(var(--size), 20px);
+    grid-template-rows: repeat(var(--size), 20px);
+
+    & > [data-val="hidden"] {
+        background-color: grey;
+    }
+
+    & > [data-val="mine"] {
+        background-color: red;
+    }
+}
+
+
+
+.item {
+    border: solid 1px black;
+}

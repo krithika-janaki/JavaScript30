@@ -1,17 +1,19 @@
 .container {
     display: grid;
-    grid-template-columns: 40px 40px 40px 40px;
-    grid-template-rows: 40px 40px 40px 40px;
-}           
+    grid-template-columns: repeat(4, 50px);
+    grid-template-rows: minmax(120px, auto) repeat(4, 50px);
+    justify-content: center;
+    align-items: center;
+    border: solid 1px black;
+}      
 
-.op {
-    grid-area: operation;
-}
-
-.num {
-    grid-area: num;
+.result {
+    border: solid 1px black;
+    grid-area: 1 / 1 / 1 / 5;
+    height: 40px;
+    
 }
 
 .equals {
-    grid-area: eq;
+    grid-area: 5 / 3 / 5 / 5;
 }

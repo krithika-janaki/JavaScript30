@@ -142,3 +142,13 @@ const nameInput = document.querySelector('input[name="name"]');
         }
         this.value = ph;
     }
+
+
+
+   /* Testf for js */
+
+const el = document.querySelector('input[name="name"]');
+el.value = 'New Val**ue**'
+el.dispatchEvent(new Event('keyup', { 'bubbles': true }));
+console.log(el.value);
+    

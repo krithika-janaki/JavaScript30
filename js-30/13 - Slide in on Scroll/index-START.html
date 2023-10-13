@@ -59,9 +59,18 @@
       };
     }
 
-    console.log(window.scrollY);
-    console.log()
+    function checkSlide() {
 
+      console.log(window.scrollY)
+      console.log(window.innerHeight);
+      console.log(element.offsetTop)
+    }
+
+   
+
+    window.addEventListener('scroll', debounce(checkSlide));
+
+</script>
   </script>
 
   <style>

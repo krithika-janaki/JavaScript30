@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            height: 100vh;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+            border: solid 1px black;
+        }
+        .item {
+            height: 30px;
+            color: white;
+            background-color: black;
+            transition: width 5s;
+            border: solid 1px red;
+            
+        }
+        #box
+{
+  background-color: steelblue;
+  height: 100px;
+  width: 100px;
+  transition: width 1s;
+  -moz-transition: width 1s;
+  -webkit-transition: width 1s, height 1s; 
+  -o-transition: width 1s;
+}
+    </style>
+</head>
+<body>
+    <div class="container"></div>
+    <div id="box"></div>
+</body>
+<script>
+    
+    const cont = document.querySelector('.container');
+    const array = [29, 16 , 46, 12, 4, 8];
+    array.forEach((ele, i) => {
+        let divv = document.createElement('div');
+        divv.classList.add('item');
+        divv.innerText = `${ele}`;
+        divv.style.width = `${ele}%`;
+
+        cont.append(divv);
+    });
+
+    let items = document.querySelectorAll('.item');
+
+function swap(first, second) {
+    return new Promise((resolve) => {
+        window.requestAnimationFrame(function() {
+            setTimeout(() => {
+        cont.insertBefore(items[second], items[first]);
+            resolve();
+    }, 5000);
+        })
+       
+    });
+        
+}
+
+async function bubbleSort() {
+    console.log('dkgjhdfkjgh')
+for(let i=0; i < array.length;i++) {
+    for(let j=0; j < array.length - i - 1; j++) {
+        
+        items[j+1].style.backgroundColor = "grey";
+        items[j].style.backgroundColor = "grey";
+        console.log('items[j+1]', items[j+1].style.backgroundColor);
+         await new Promise((resolve) => {
+            setTimeout(() => {
+               resolve()
+            }, 1000)
+        });
+
+        if (array[j+1] < array[j]) {
+            console.log({j})
+            await new Promise((resolve) => {
+        setTimeout(() => {
+        cont.insertBefore(items[j+1], items[j]);
+            resolve();
+    }, 5000);
+    });
+            items = document.querySelectorAll('.item');
+        }
+
+        console.log(items[j+1].innerText);
+        console.log(items[j].innerText);
+        items[j+1].style.removeProperty("background-color");
+        items[j].style.removeProperty("background-color");
+
+    }
+}
+
+}
+bubbleSort();
+// (async () => {
+//     await swap(0, 1);
+//     items = document.querySelectorAll('.item')
+// })();
+
+
+
+</script>
+</html>

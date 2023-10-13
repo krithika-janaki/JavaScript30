@@ -61,15 +61,33 @@
   </style>
 
   <script>
-    const inputs = document.querySelectorAll('.controls input');
+    class BB {
+      constructor() {
+        const inputs = document.querySelectorAll('.controls input');
+        inputs.forEach(input => input.addEventListener('change', this.handleUpdate));
+    inputs.forEach(input => input.addEventListener('mousemove', this.handleUpdate));
+      }
 
-    function handleUpdate() {
+      handleUpdate(e) {
+      console.log('e.target', e.target)
+      console.log('this', this);
       const suffix = this.dataset.sizing || '';
       document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
     }
 
-    inputs.forEach(input => input.addEventListener('change', handleUpdate));
-    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+
+    }
+    new BB();
+    // const inputs = document.querySelectorAll('.controls input');
+    // function handleUpdate(e) {
+    //   console.log('')
+    //   console.log('this', this);
+    //   const suffix = this.dataset.sizing || '';
+    //   document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+    // }
+
+    // inputs.forEach(input => input.addEventListener('change', handleUpdate));
+    // inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
   </script>
 
 

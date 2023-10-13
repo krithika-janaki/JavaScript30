@@ -35,36 +35,36 @@
 
 <script>
   const holes = document.querySelectorAll('.hole');
-  const scoreBoard = document.querySelector('.score');
-  const moles = document.querySelectorAll('.mole');
-  let lastHole;
-  let timeUp = false;
+  const moles = document.querySelectorAll('.hole .mole');
+  let endGame = false;
+
+  function chooseRandomHole() {
+    console.log(Math.floor(Math.random() * holes.length));
+    return Math.floor(Math.random() * holes.length);
+    
+  }
+
+  function chooseRandomTime() {
+    return Math.round(Math.random() * 5000);
+
+  }
 
   function peep() {
-    activeHole = holes[Math.floor(Math.random()*holes.length)];
-    activeHole.classList.add('up');
-    const randTime = 2000 * Math.random() + 1000; 
+    const hole = chooseRandomHole();
+    console.log('hole', hole)
+    holes[hole].classList.add('up');
     setTimeout(() => {
-      activeHole.classList.remove('up');
-      if(!timeUp) {
-        peep();
-      }
-    }, randTime)
-    
-    return activeHole;
+      holes[hole].classList.remove('up');
+      if(!endGame) peep();
+    }, chooseRandomTime())
   }
-
-  function increaseScore() {
-    document.querySelector('span').innerHTML = Number(document.querySelector('span').innerHTML)+ 1
-  }
-
-  moles.forEach(mole => mole.addEventListener('click', increaseScore))
 
   function startGame() {
+    endGame = false;
     peep();
     setTimeout(() => {
-      timeUp = true;
-    }, 10000)
+      endGame = true;
+    }, 5000)
   }
 
 

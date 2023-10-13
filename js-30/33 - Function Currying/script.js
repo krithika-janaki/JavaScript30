@@ -1,9 +1,14 @@
-import { con } from "lodash";
+
 
 function join(a, b, c) {
     return `${a}_${b}_${c}`
 }
 /* should be able to call this as curriedJoin(1,2,3)/ curriedJoin(1)(2,3)/ curriedJoin(1)(2)(3) */
+
+
+function curried(func) {
+    return 
+}
 
 function curry(func) {
 return function curried(...args) {

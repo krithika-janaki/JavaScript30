@@ -85,4 +85,20 @@ function myThrottle(func, wait) {
     }
   };
 
+  function Blah(name) {
+    this.name = name;
+
+    this.func = function() {
+        console.log('this with arrow func', this.name);
+    }
+  }
+const nn = new Blah('tommy');
+console.log(nn.func());
+
+
+// my debounce function
+
+function myDebounce(func, delay) {
+    re
+}
   

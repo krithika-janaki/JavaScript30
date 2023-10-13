@@ -69,7 +69,12 @@
     }
 
     .panel > *:first-child { transform: translateY(-100%); }
-    .panel.open-active > *:first-child { transform: translateY(0); }
+    .panel.open-active {
+        &:first-child {
+          transform: translateY(0);
+        }
+    }
+
     .panel > *:last-child { transform: translateY(100%); }
     .panel.open-active > *:last-child { transform: translateY(0); }
 
@@ -129,14 +134,19 @@
      class FlexPanel {
       constructor() {
         this.panel = document.querySelectorAll('.panel');
-        this.panel.forEach((pp) => pp.addEventListener('click', this.toggleOpen));
+        this.panel.forEach((pp) => { 
+          console.log('pp', pp);
+          pp.addEventListener('click', (e) => {
+            this.toggleOpen(e, pp)
+          }) }) ;
         this.panel.forEach((pp) => pp.addEventListener('transitionend', this.toggleActive));
 
       }
 
-      toggleOpen() {
-      console.log('Hello');
-      this.classList.toggle('open');
+      toggleOpen(e, pp) {
+        console.log('e.target', e.target);
+      console.log('Hello', pp);
+       pp.classList.toggle('open');
     }
 
     toggleActive(e) {

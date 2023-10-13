@@ -42,8 +42,7 @@ h1 {
   position: relative;
 }
 
-.hole:after {
-  display: block;
+ .hole:after {
   background: url(dirt.svg) bottom center no-repeat;
   background-size: contain;
   content: '';
@@ -52,7 +51,7 @@ h1 {
   position: absolute;
   z-index: 2;
   bottom: -30px;
-}
+} 
 
 .mole {
   background: url('mole.svg') bottom center no-repeat;
