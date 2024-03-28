@@ -1,0 +1,11 @@
+.nested {
+ display: none;
+}
+
+.active {
+    display: block;
+}
+
+.open {
+    transform: rotate(90deg);
+}

@@ -1,0 +1,23 @@
+/*
+setTimeout(func1, 10000)
+setTimeout(func2, 10000)
+setTimeout(func3, 10000)
+
+// all 3 functions are scheduled 10 seconds later
+clearAllTimeout()
+*/
+
+const originalSetTimeout = window.setTimeout;
+const timerIds = [];
+
+window.setTimeout = function (callback, delay) {
+  const id = originalSetTimeout(this, callback, delay);
+
+  timerIds.push(id);
+};
+
+function clearAllTimeout() {
+  for (let i = 0; i < timerIds.length; i++) {
+    clearTimeout(timerIds[i]);
+  }
+}

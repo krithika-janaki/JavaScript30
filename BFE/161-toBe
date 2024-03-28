@@ -1,0 +1,32 @@
+
+
+
+
+
+/**
+ * interface Matcher {
+ *  toBe(data: any): void
+ * }
+ */
+/**
+ * @param {any} input
+ * @returns {Matcher & {not: Matcher}}
+ */
+function myExpect(input) {
+  function toBe(val, negate = false) {
+   if (!Object.is(input, realInput) && !not || Object.is(input, realInput) && not) {
+      throw new Error();
+    }
+  }
+  return {
+    toBe,
+    not: {
+      toBe: function(val) {
+        return toBe(val, true)
+      }
+    }
+  }
+}
+
+
+

@@ -1,0 +1,35 @@
+/**
+ * @param {HTMLElement} tree
+ * @return {string[]}
+ */
+function getTags(tree) {
+  // your code here
+  //simpe DFS
+  // let arr = [];
+  // function helper(node){
+  //   let node_name = node.tagName.toLowerCase()
+  //   if(!arr.includes(node_name)) arr.push(node_name)
+  //   if(node.children.length === 0) return
+  //   for(let c of node.children){
+  //       helper(c)
+  //   }
+  // }
+  // helper(tree)
+  //return arr
+
+  //BFS
+
+  let arr = [];
+  let queue = [tree];
+
+  while (queue.length > 0) {
+    let node = queue.shift();
+    let node_name = node.tagName.toLowerCase();
+    if (!arr.includes(node_name)) arr.push(node_name);
+    for (let c of node.children) {
+      queue.push(c);
+    }
+  }
+
+  return arr;
+}

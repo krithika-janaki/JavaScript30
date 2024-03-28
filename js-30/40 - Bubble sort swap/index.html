@@ -81,10 +81,10 @@
                 for(let j=0; j < inputArr.length - i - 1; j++) {
                     arrGrid[j+1].style.backgroundColor = "yellow";
                     arrGrid[j].style.backgroundColor = "yellow";
-                    new Promise((resolve) => {
+                    await new Promise((resolve) => {
                         setTimeout(() => {
                            resolve()
-                        }, 3000)
+                        }, 9000)
                     });
 
                     if(inputArr[j+1] < inputArr[j]) {

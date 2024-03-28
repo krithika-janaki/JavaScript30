@@ -1,0 +1,18 @@
+function firstBadVersion(isBad) {
+  return function (version) {
+    let left = 0;
+    let right = version;
+
+    while (left <= right) {
+      let mid = Math.floor((left + right) / 2);
+
+      if (isBad(mid)) {
+        right = mid - 1;
+      } else {
+        left = mid + 1;
+      }
+
+      return isBad(left) ? left : -1;
+    }
+  };
+}

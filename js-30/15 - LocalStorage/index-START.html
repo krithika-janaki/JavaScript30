@@ -27,38 +27,54 @@
   </div>
 
 <script>
-  const form = document.querySelector('form');
-  const list = document.querySelector('ul');
-  let arr = [];
+  const formSubmit = document.querySelector(".add-items");
+  const listContainer = document.querySelector('.plates');
 
   function onSubmit(e) {
     e.preventDefault();
-    const itemName = this.querySelector('input[name="item"]').value;
-    populateList(itemName, list);
+    const inputVal = this.querySelector('[name=item]').value;
+    const listLength = listContainer.querySelectorAll('li').length;
+    console.log(inputVal)
+    addToList(inputVal, listLength);
     this.reset();
   }
 
-  function populateList(itemName) {
-    arr.push(itemName);
-    let html = arr.map((ele, ind) => {
-      return `<li>
-        <input type="checkbox" id="pp${ind}" data-id="${ind}" />
-        <label for="pp${ind}">${ele}</label>
-        </li>
-        `
-    }).join('');
-    list.innerHTML = html;
+  function createListItem(val, id) {
+    const li = document.createElement('li');
+    const input = document.createElement('input');
+    const label = document.createElement('label');
+    const input2 = document.createElement('div');
+    input.type = "checkbox";
+    input.checked = false;
+    input.id = id;
+    label.textContent = val;
+    label.setAttribute('for', id);
+    li.append(input);
+    li.append(label);
+    li.append(input2);
+    return li;
   }
 
-  function handleClick(e) {
-    if(!e.target.matches('input')) return;
-
-    e.target.checked = true;
-    console.log(e.target);
+  function addToList(val, id) {
+    const listItem = createListItem(val, id);
+    listContainer.append(listItem);
   }
 
-  list.addEventListener('click', handleClick);
-  form.addEventListener('submit', onSubmit);
+  function onChecked(e) {
+    console.log(e.target)
+    // if(!e.target.matches('input')) {
+    //   console.log('in here')
+    //   return;
+    // }
+    // e.target.checked = !e.target.checked;
+
+  }
+
+ 
+
+  formSubmit.addEventListener('submit', onSubmit);
+  listContainer.addEventListener('click', onChecked)
+  
 
 </script>
 

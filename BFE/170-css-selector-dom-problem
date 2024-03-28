@@ -1,0 +1,21 @@
+function generateSelector(root, target) {
+  const results = [];
+
+  function dfs(node, path) {
+    if (!node) return;
+    const nodeName = node.tagName.toLowerCase();
+
+    if (node === target) {
+      const id = node.id;
+      results.push(...path, id ? `${nodeName}#${id}` : nodeName);
+      return;
+    }
+
+    for (let i = 0; i < node.children.length; i++) {
+      dfs(node.children[i], [...path, nodeName]);
+    }
+  }
+  dfs(root, []);
+
+  return results.join(" > ");
+}

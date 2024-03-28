@@ -1,0 +1,31 @@
+//   recursively
+
+const findCorrespondingNode = (rootA, rootB, target) => {
+  if (!rootA || !rootB) {
+    return null;
+  }
+
+  if (rootA === target) {
+    return rootB;
+  }
+
+  for (let i = 0; i < rootA.children; i++) {
+    findCorrespondingNode(rootA.children[i], rootB.children[i], target);
+  }
+};
+
+//  iterative
+const findCorrespondingNodeIterative = (rootA, rootB, target) => {
+  const queue = [{ rootA, rootB }];
+
+  while (queue.length) {
+    const { nodeA, nodeB } = queue.shift();
+    if (nodeA === target) return nodeB;
+
+    for (let i = 0; i < nodeA.children; i++) {
+      nodeAchild = nodeA.children[i];
+      nodeBChild = nodeB.children[i];
+      queue.push({ nodeAchild, nodeBChild });
+    }
+  }
+};

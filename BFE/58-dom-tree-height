@@ -1,0 +1,16 @@
+/**
+ * @param {HTMLElement | null} tree
+ * @return {number}
+ */
+function getHeight(tree) {
+  function dfs(node) {
+    let max = 0;
+    if (!node) return 0;
+
+    for (let child of node.children) {
+      max = Math.max(max, dfs(child));
+    }
+    return max + 1;
+  }
+  return dfs(tree);
+}

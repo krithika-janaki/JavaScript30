@@ -1,0 +1,30 @@
+
+
+
+/**
+ * @param {Element} root
+ * @param {Element} target
+ * @return {Elemnt | null}
+ */
+function previousLeftSibling(root, target) {
+  let queue = [root];
+
+  while (queue.length) {
+
+    let arr = [];
+      for(let i=0; i < queue.length; i++) {
+        let curr = queue[i];
+
+        if(curr === target) {
+          return queue[i-1] || null;
+        }
+
+        arr.push(...curr.children)
+      }
+
+      queue = arr;
+
+  }
+
+return null
+}

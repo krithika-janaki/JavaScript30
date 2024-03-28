@@ -1,0 +1,18 @@
+function moveZeros(list) {
+  // your code here
+  let left = 0;
+  let right = 0;
+  let n = list.length;
+
+  while (right < n) {
+    if (list[right] !== 0) {
+      [list[left], list[right]] = [list[right], list[left]];
+      left++;
+    }
+    right++;
+  }
+  return list;
+}
+
+console.log(moveZeros([0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 0, 6, 0, 0]));
+console.log(moveZeros([1, 0, 0, 2, 3]));
