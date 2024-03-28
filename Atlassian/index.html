@@ -1,16 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
-    <title>Document</title>
-</head>
-<body>
-    <div class="container">
+Our company wants to switch to data driven product development. To make this initiative work we need to design a reusable function capable of collecting and delivering UI analytics to the backend server.
 
-    </div>
-</body>
-</html>
+To get you started we created a small snippet of code which should explain how we intend to use that API function.
+
+```js
+// This is the example of component to be instrumented using the function
+class Component {
+  constructor() {
+    // this is where the unction could be called for example
+    sendAnalyticsEvent(event);
+    setTimeout(this.init, 100);
+  }
+  init() {
+    sendAnalyticsEvent(event);
+  }
+}
+```
+
+Your goal is to implement the sendAnalyticsEvent(event) API function.
+
+```js
+
+const sendAnalyticsEvent = (event) => {
+  const timer;
+  let failureCount = 0;
+  let isUnavailable = false;
+  let lastFailedTime = 0;
+
+
+  if(isUnavailable)  {
+    if(Date.now() - lastFailedTime > 10000) {
+      isUnavailable = false;
+      makeApiCall();
+    } else {
+      console.log('sorry the server is unavailable');
+      return;
+    }
+  } else {
+    makeApiCall();
+  }
+
+  while(failureCount < 3) {
+    
+  }
+     doRequest(event).then(({ok, status, json}) => {
+    if(status === 200) {
+      console.log('sucess')
+    } else if(status === 500) {
+      // trying again 
+      failureCount++;
+      lastFailedTime = Date.now();
+      if(failureCount >= 3) {
+        isUnavailable = true;
+      }
+      if(!isUnavailable) {
+         setTimeout(() => {
+        makeApiCall();
+      }, 1000)
+      }  
+    }
+  })
+  }
+
+ 
+};
+```
+
+When using an API, you would need to POST those analytics events down to the backend via some `/analytics` end-point. To get you started we’ve developed a simple mock of the server API abstraction.
+Feel free to change this implementation.
+
+```js
+const doRequest = (events) => {
+  return new Promise((resolve, reject) => {
+    return resolve({
+      ok: true,
+      status: 200,
+      json: () => Promise.resolve({}),
+    });
+  });
+};
+```
+
+Server returns 200 HTTP code and empty response when API worked fine.
+
+Server returns 500 HTTP code and empty response when server has experienced an error.
+
+```js
+const doRequest = (event) => {
+  return new Promise((resolve, reject) => {
+    return resolve({
+      ok: false,
+      status: 500,
+      json: () => null,
+    });
+  });
+};
+```
