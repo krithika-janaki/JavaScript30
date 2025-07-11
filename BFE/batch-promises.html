@@ -1,0 +1,63 @@
+// batch promises . Only 3 promises should run at a time 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+const p1 = () => {
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      res("I am 5000")
+    }, 5000)
+  })
+}
+
+const p2 = () => {
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      res("I am 10000")
+    }, 10000)
+  })
+}
+
+const p3 = () => {
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      res("I am 2000")
+    }, 2000)
+  })
+}
+
+const ar = [p2, p3, p1, p2, p1, p3];
+
+function batchPromises(ar) {
+  let count = 0;
+  let i = 0;
+  let queue = []
+  return new Promise((resolve) => {
+    function pushTask(task) {
+      if(count < 3) {
+        execute(task);
+      } else {
+        queue.push(task);
+      }
+    }
+  })
+}
+
+batchPromises(ar).then((data) => {
+  console.log("its all finished")
+})
+
+    </script>
+</body>
+</html>
+
+

@@ -81,6 +81,42 @@ async function LogAll() {
 // console.log('res', res);
 const {m1, m2} = LogAll();
 console.log(m1, m2)
+console.log("starting auto retry")
+let pcount = 0;
+let retry = 0;
+
+function defPromise(pcount) {
+  console.log("pcount when calling function", pcount)
+  return new Promise((res, rej) => {
+  console.log("pcount = ", pcount)
+  if(pcount > 2) {
+    setTimeout(() => {
+    res("yay success")
+  }, 5000);
+  } else {
+    console.log("inside reject pcount", pcount)
+    setTimeout(() => {
+    rej("hard luck")
+  }, 3000);
+  }
+});
+}
+
+function runPromise() {
+  defPromise(pcount).then((data) => {
+    console.log(data);
+  }, (rej) => {
+    if(pcount < 3) {
+      pcount++;
+      console.log(rej);
+      runPromise()
+    } else {
+      console.log("ALL DONE!!")
+    }
+  })
+}
+runPromise();
+
     </script>
 </body>
 </html>
