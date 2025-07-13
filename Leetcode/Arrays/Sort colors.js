@@ -12,4 +12,4 @@
         }
     }
 
-    // saw solution but could come up with o(1 space approach but did not know quick sort. it is complicated. please go through it again)
+    // saw solution but could come up with o(1 space approach but did not know quick sort. it is complicated. please go through it again
