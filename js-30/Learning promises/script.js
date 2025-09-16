@@ -213,24 +213,24 @@ const p2 = function (data) {
   });
 };
 // console.log(
-//   p1().then((data) => {
+//   p1.then((data) => {
 //     console.log("data");
 //   })
 // );
 
-// p2(true).then((data) => {
-//    return p1.then((err) => {
-//     // console.log('in the p1 function after p2 finished = ', err); 
-//     return Promise.resolve('blah blah after p2 finishes')   
-//   })
-// })
-// .catch((err) => {
-//   console.log('------oopsie', err)
-//   return 'hell'
-// })
-// .then((d) => {
-//   console.log('****', d)
-// })
+p2(true).then((data) => {
+   return p1.then((err) => {
+    // console.log('in the p1 function after p2 finished = ', err); 
+    return Promise.resolve('blah blah after p2 finishes')   
+  })
+})
+.catch((err) => {
+  console.log('------oopsie', err)
+  return 'hell'
+})
+.then((d) => {
+  console.log('****', d)
+})
 
 function job() {
   return new Promise(function(resolve, reject) {

@@ -1,29 +1,22 @@
-function join(a, b, c) {
-  return `${a}_${b}_${c}`;
-}
-/* should be able to call this as curriedJoin(1,2,3)/ curriedJoin(1)(2,3)/ curriedJoin(1)(2)(3) */
+// Please implement a curry() function, which accepts a function and return a curried one.
 
-function curried(func) {
-  return;
-}
+// Here is an example
+
+// const join = (a, b, c) => {
+//    return `${a}_${b}_${c}`
+// }
+// const curriedJoin = curry(join)
+// curriedJoin(1, 2, 3) // '1_2_3'
+// curriedJoin(1)(2, 3) // '1_2_3'
+// curriedJoin(1, 2)(3) // '1_2_3'
 
 function curry(func) {
-  return function curried(...args) {
-    // 1. if enough args, call func
-    // 2. if not enough, bind the args and wait for new one
 
-    if (args.length >= func.length) {
-      console.log("func", func);
-      console.log("args", args);
-      console.log("this keyword", this);
-      return func(args);
+  return function curried(...args) {
+    if(args.length >= func.length) {
+      return func.call(this, ...args);
     } else {
-      // 1,2
-      console.log("thisin curried", this);
       return curried.bind(this, ...args);
     }
-  };
+  }
 }
-
-const curriedJoin = curry(join);
-console.log(curriedJoin(1)(2, 3));
